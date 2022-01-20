@@ -1,0 +1,242 @@
+# def server_took_data():
+#     """Принимает данные по сокету от официантов"""
+#
+#     sock = socket.socket()
+#     sock.bind(('', 1028))
+#     sock.listen(1)
+#
+#     while True:
+#
+#         conn, addr = sock.accept()
+#         print('connected:', addr)
+#
+#         try:
+#             data = conn.recv(4096)
+#             print('Мыслю следовательно существую')
+#             if data:
+#                 print(data.decode())
+#             else:
+#                 time.sleep(1)
+#                 print('Я сляяяяжуууу')
+#         except:
+#             pass
+#         conn.close()
+
+
+class ServerAuthWaiter:
+    """Класс для работы с данными о заказах от официантов и авторизации"""
+
+    def __init__(self):
+        self.HOST = ''  # Символическое имя обозначающее все доступные интерфейсы
+        self.PORT = 8886  # Порт через который работае программка
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print('Сокет создан')
+        self.binding()
+        self.sock.listen(10)
+        print('Приём соединений:')
+        self.lisen = threading.Thread(self.clientthread())
+
+    def binding(self):
+        """Привязка сокета на локальный порт"""
+        try:
+            self.sock.bind((self.HOST, self.PORT))
+            print('Попытка привязки')
+        except socket.error as msg:
+            print('Привязка не удалась. Ошибка : ' + str(msg[0]) + ' Подробности : ' + msg[1]) #todo исправить
+            sys.exit()
+        print('Сокет успешно привязан')
+
+    def clientthread(self):
+        """Функция принимающая соединения в паралельных потоках"""
+
+        # infinite loop so that function do not terminate and thread do not end.
+        while True:
+            conn, addr = self.sock.accept()
+            #conn.send('Подключение успешно') # Отправка сообщения клиенту об успешном подключении
+            try:
+                data = conn.recv(4096)
+                if data:
+                    print(data.decode())
+                else:
+                    time.sleep(1)
+                    print('Я сляяяяжуууу')
+            except:
+                pass
+        conn.close()
+
+    # # Начало прослушки
+    # sock.listen(10)
+    # print('Приём соединений:')
+    # lisen = threading.Thread()
+
+    # # now keep talking with the client
+    # while True:
+    #     # wait to accept a connection - blocking call
+    #     conn, addr = sock.accept()
+    #     print('Соединение с ' + addr[0] + ':' + str(addr[1]))
+    #
+    #     # start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
+    #     start_new_thread(clientthread, (conn,))
+    #
+    # s.close()
+
+class ServerAuthWaiter(BaseHTTPServer.BaseHTTPRequestHandler):
+    """Класс для работы с данными о заказах от официантов и авторизации"""
+
+    def _set_headers(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.end_headers()
+
+    def do_HEAD(self):
+        self._set_headers()
+
+    # GET sends back a Hello world message
+    def do_GET(self):
+        self._set_headers()
+        self.wfile.write(json.dumps({'hello': 'world', 'received': 'ok'}))
+
+    # POST echoes the message adding a JSON field
+    def do_POST(self):
+        ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
+
+        # refuse to receive non-json content
+        if ctype != 'application/json':
+            self.send_response(400)
+            self.end_headers()
+            return
+
+        # read the message and convert it into a python dictionary
+        length = int(self.headers.getheader('content-length'))
+        message = json.loads(self.rfile.read(length))
+
+        # add a property to the object, just to mess with data
+        message['received'] = 'ok'
+
+        # send the message back
+        self._set_headers()
+        self.wfile.write(json.dumps(message))
+
+
+# def send(data):
+#     """Отправка данных серверу"""
+#     sock = socket.socket()
+#     sock.connect(('localhost', 8886))
+#     sock.recv(4096)
+#     sock.send(bytes('Привет'))
+#     sock.close()
+
+
+def send_ice():
+    """Функция отправки данных"""
+    with Ice.initialize(sys.argv) as web_connect:
+        adapter = web_connect.stringToProxy("Сервер:default -p 8886")
+        adapter.printString("Сообщение тута")
+
+
+def server_ice():
+    """Функция запуска сервера для скармливания потоку"""
+    with Ice.initialize(sys.argv) as web_connect:
+        adapter = web_connect.createObjectAdapterWithEndpoints("Адаптер сервера", "default -p 8886")
+        object = Server()
+        adapter.add(object, web_connect.stringToIdentity("Сервер"))
+        adapter.activate()
+        web_connect.waitForShutdown()
+
+
+
+# class ServerAuthWaiter:
+#     """Класс для работы с данными о заказах от официантов и авторизации"""
+#
+#     def __init__(self):
+#         self.HOST = ''  # Символическое имя обозначающее все доступные интерфейсы
+#         self.PORT = 8886  # Порт через который работае программка
+#         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#         print('Сокет создан')
+#         self.binding()
+#         self.sock.listen(10)
+#         print('Приём соединений:')
+#         self.listen = threading.Thread(self.clienthread())
+#
+#     def binding(self):
+#         """Привязка сокета на локальный порт"""
+#         try:
+#             self.sock.bind((self.HOST, self.PORT))
+#             print('Попытка привязки')
+#         except socket.error as msg:
+#             print('Привязка не удалась. Ошибка : ' + str(msg[0]) + ' Подробности : ' + msg[1]) #todo исправить
+#             sys.exit()
+#         print('Сокет успешно привязан')
+#
+#     def clienthread(self):
+#         """Функция принимающая соединения в паралельных потоках"""
+#
+#         while True:
+#             conn, addr = self.sock.accept()
+#             #conn.send('Подключение успешно') # Отправка сообщения клиенту об успешном подключении
+#             try:
+#                 data = conn.recv(4096)
+#                 if data:
+#                     print(data.decode())
+#                 else:
+#                     time.sleep(1)
+#                     print('Я сляяяяжуууу')
+#             except:
+#                 pass
+#         conn.close()
+
+class Server():
+    def printString(self, string):
+        print(string)
+
+
+        # def server_http_start():
+#     """Запускает сервер"""
+#     serv = http.server.ThreadingHTTPServer((socket.gethostname(), 25564), Server)
+#     serv.serve_forever()
+Start = Server(MainForm)
+
+
+    # Serv = ServerAuthWaiter
+    # server_waiter = threading.Thread(target=Serv)
+    # server_waiter.start()
+
+    # main = threading.Thread(target=main_form_start()).start()
+    # serv = threading.Thread(target=server_http_start()).start()
+    # print(f"Запущено потоков: {threading.active_count()}")
+
+    # serv = threading.Thread(target=server_http_start()).start()
+    # main_form_start()
+
+    class Server(http.server.ThreadingHTTPServer):
+    """Описывает сервер для клиентских приложений"""
+
+    def __init__(self, form: MainForm):
+        self.server_name = 'Сервер АРесторана'
+        self.port = 25564
+        self.address = socket.gethostname() # узнаю айпи машины на которой сервер
+        self.last_post_file = None
+        super().__init__((self.address, self.port), http.server.BaseHTTPRequestHandler)
+        self.main = threading.Thread(target=main_form_start()).start()
+        self.serve_forever()
+
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write('Сервер существует')
+
+    def do_POST(self):
+        content_length = int(self.headers['Content-Length'])
+        body = self.rfile.read(content_length)
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+        print(body)
+
+def main_form_start():
+    """Запуск главной формы для скармливания потоку"""
+    app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
+    app.setStyle('Fusion')
+    window = MainForm()
+    window.show()  # запуск формы main()
+    sys.exit(app.exec_())

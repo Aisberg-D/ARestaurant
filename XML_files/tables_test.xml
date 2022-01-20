@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<tables>
+	<table number="0" sit_p="4">
+		<status>0</status>
+		<order>None</order>
+		<cur_waiter>None</cur_waiter>
+	</table>
+	<table number="1" sit_p="5">
+		<status>0</status>
+		<order>None</order>
+		<cur_waiter>None</cur_waiter>
+	</table>
+	<table number="2" sit_p="66">
+		<status>0</status>
+		<order>None</order>
+		<cur_waiter>None</cur_waiter>
+	</table>
+</tables>

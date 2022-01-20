@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<items num="7">
+    <item id="001" name="Сервировка царская" status="actual">
+        <mass></mass>
+        <coocking_time></coocking_time>
+        <type>Дополнительное</type>
+        <info>Особая сервировка стола включащая в себя комплект обычной и также: 2 бокала, 1 нож.</info>
+        <img_name></img_name>
+        <price>1500</price>
+    </item>
+    <item id="002" name="Баклажаны с сыром" status="actual">
+        <mass>150</mass>
+        <coocking_time>10</coocking_time>
+        <type>Закуска</type>
+        <info>Вкуснейший сыр Моцарелла расплавленный и завёрнутый в баклажаны</info>
+        <img_name></img_name>
+        <price>200</price>
+    </item>
+    <item id="003" name="Цезарь" status="actual">
+        <mass>450</mass>
+        <coocking_time>20</coocking_time>
+        <type>Салат</type>
+        <info>Салат Цезарь с курицей</info>
+        <img_name></img_name>
+        <price>350</price>
+    </item>
+    <item id="004" name="Необыкновенный" status="actual">
+        <mass>300</mass>
+        <coocking_time>8-20</coocking_time>
+        <type>Салат</type>
+        <info>Делается на усмотрение повара</info>
+        <img_name></img_name>
+        <price>100</price>
+    </item>
+    <item id="005" name="Водка Столичная" status="actual">
+        <mass>500</mass>
+        <coocking_time>0</coocking_time>
+        <type>Напиток</type>
+        <info>Если вы пришли сюда не только пожрать, но и нажраться, это ваш выбор</info>
+        <img_name></img_name>
+        <price>850</price>
+    </item>
+    <item id="006" name="Котлетки с пюрешкой" status="actual">
+        <mass>350</mass>
+        <coocking_time>35</coocking_time>
+        <type>Горячее</type>
+        <info>2 говяжьих котлетки с толчённым картофелем</info>
+        <img_name></img_name>
+        <price>350</price>
+    </item>
+    <item id="007" name="Seven" status="actual">
+        <mass>350</mass>
+        <coocking_time>35</coocking_time>
+        <type>Напиток</type>
+        <info>1</info>
+        <img_name></img_name>
+        <price>350</price>
+    </item>
+</items>

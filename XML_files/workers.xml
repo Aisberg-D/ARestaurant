@@ -1,0 +1,48 @@
+<workers>
+    <worker id="010" position="cheff">
+        <fio>Василий Иванович Куропаткин</fio>
+        <age>54</age>
+        <fhone_nuber>7*********</fhone_nuber>
+        <time>1</time>
+    </worker>
+    <worker id="020" position="cheff">
+        <fio>Васялий Алексеевич Курочкин</fio>
+        <age>53</age>
+        <fhone_nuber>7*********</fhone_nuber>
+        <time>2</time>
+    </worker>
+    <worker id="011" position="waiter">
+        <fio>Аркадий Акакиевич Куроешкин</fio>
+        <age>24</age>
+        <fhone_nuber>7*********</fhone_nuber>
+        <time>1</time>
+        <num_tables>3</num_tables>
+    </worker>
+    <worker id="012" position="waiter">
+        <fio>Акакий Аркадиевич Курожор</fio>
+        <age>23</age>
+        <fhone_nuber>7*********</fhone_nuber>
+        <time>1</time>
+        <num_tables>1 2</num_tables>
+    </worker>
+        <worker id="021" position="waiter">
+        <fio>Вениамин Иванович Крутовар</fio>
+        <age>25</age>
+        <fhone_nuber>7*********</fhone_nuber>
+        <time>2</time>
+        <num_tables>3</num_tables>
+    </worker>
+    <worker id="022" position="waiter">
+        <fio>Яков Григорьевич Сыровар</fio>
+        <age>23</age>
+        <fhone_nuber>7*********</fhone_nuber>
+        <time>2</time>
+        <num_tables>1 2</num_tables>
+    </worker>
+    <worker id="000" position="office worker">
+        <fio>Изеслав Изеславович Сыржоркин</fio>
+        <age>33</age>
+        <fhone_nuber>7*********</fhone_nuber>
+        <time>0</time>
+    </worker>
+</workers>

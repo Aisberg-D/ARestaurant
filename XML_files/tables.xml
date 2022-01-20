@@ -1,0 +1,17 @@
+<tables>
+    <table number="1" sit_p="4">
+        <status>0</status>
+        <order>None</order>
+        <cur_waiter>None</cur_waiter>
+    </table>
+        <table number="2" sit_p="5">
+        <status>0</status>
+        <order>None</order>
+        <cur_waiter>None</cur_waiter>
+    </table>
+        <table number="3" sit_p="2">
+        <status>0</status>
+        <order>None</order>
+        <cur_waiter>None</cur_waiter>
+    </table>
+</tables>
